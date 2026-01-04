@@ -82,8 +82,8 @@
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
-    "lint": "eslint src --ext .ts,.tsx",
-    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
     "codegen": "graphql-codegen --config codegen.ts",
@@ -112,6 +112,7 @@
     "wonka": "^6.3.4"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.2",
     "@graphql-codegen/cli": "^5.0.3",
     "@graphql-codegen/introspection": "^4.0.3",
     "@graphql-codegen/typed-document-node": "^6.1.5",
@@ -143,6 +144,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "typescript": "^5.7.2",
+    "typescript-eslint": "^8.51.0",
     "urql": "^4.2.0",
     "vite": "^6.0.6",
     "vite-plugin-dts": "^4.4.0",
