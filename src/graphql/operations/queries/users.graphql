@@ -1,0 +1,33 @@
+# User Queries
+
+fragment UserCore on FairuUser {
+  id
+  name
+  email
+  status
+  owner
+}
+
+query FairuUsers($page: Int, $perPage: Int) {
+  fairuUsers(page: $page, perPage: $perPage) {
+    data {
+      ...UserCore
+    }
+    paginatorInfo {
+      total
+      count
+      perPage
+      currentPage
+      lastPage
+      hasMorePages
+      firstItem
+      lastItem
+    }
+  }
+}
+
+query FairuUser($id: ID!) {
+  fairuUser(id: $id) {
+    ...UserCore
+  }
+}

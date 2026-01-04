@@ -1,0 +1,124 @@
+# Upload Mutations
+
+mutation CreateFairuUploadLink(
+  $filename: String!
+  $type: FairuUploadType
+  $download_url: String
+  $folder: ID
+  $id: ID
+  $fileSize: Int
+  $alt: String
+  $caption: String
+  $description: String
+  $focal_point: String
+  $copyright: String
+) {
+  createFairuUploadLink(
+    filename: $filename
+    type: $type
+    download_url: $download_url
+    folder: $folder
+    id: $id
+    fileSize: $fileSize
+    alt: $alt
+    caption: $caption
+    description: $description
+    focal_point: $focal_point
+    copyright: $copyright
+  ) {
+    id
+    upload_url
+    sync_url
+    mime
+  }
+}
+
+mutation InitFairuMultipartUpload(
+  $filename: String!
+  $folder: ID
+  $fileSize: Int
+  $contentType: String
+  $alt: String
+  $caption: String
+  $description: String
+  $copyright: String
+) {
+  initFairuMultipartUpload(
+    filename: $filename
+    folder: $folder
+    fileSize: $fileSize
+    contentType: $contentType
+    alt: $alt
+    caption: $caption
+    description: $description
+    copyright: $copyright
+  ) {
+    id
+    uploadId
+    partSize
+    totalParts
+    parts {
+      partNumber
+      uploadUrl
+    }
+    sync_url
+  }
+}
+
+mutation GetFairuMultipartPartUrl(
+  $fileId: ID!
+  $uploadId: String!
+  $partNumber: Int!
+) {
+  getFairuMultipartPartUrl(
+    fileId: $fileId
+    uploadId: $uploadId
+    partNumber: $partNumber
+  ) {
+    partNumber
+    uploadUrl
+  }
+}
+
+mutation CompleteFairuMultipartUpload(
+  $fileId: ID!
+  $uploadId: String!
+  $parts: [FairuMultipartPartInput!]!
+) {
+  completeFairuMultipartUpload(
+    fileId: $fileId
+    uploadId: $uploadId
+    parts: $parts
+  ) {
+    id
+    upload_url
+    sync_url
+    mime
+  }
+}
+
+mutation AbortFairuMultipartUpload($fileId: ID!, $uploadId: String!) {
+  abortFairuMultipartUpload(fileId: $fileId, uploadId: $uploadId)
+}
+
+mutation CreateFairuFolderUploadShareLink(
+  $id: ID!
+  $expires_in: FairuUploadShareLinkExpiration
+  $name: String
+) {
+  createFairuFolderUploadShareLink(id: $id, expires_in: $expires_in, name: $name) {
+    id
+    url
+    expires_at
+    name
+    folder_id
+  }
+}
+
+mutation CreateFairuFileAccessSignature($ids: [ID!]!, $valid_for_minutes: Int) {
+  createFairuFileAccessSignature(ids: $ids, valid_for_minutes: $valid_for_minutes) {
+    file_id
+    signature
+    expires_at
+  }
+}

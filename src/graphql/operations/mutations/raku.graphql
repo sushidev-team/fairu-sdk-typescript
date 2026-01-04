@@ -1,0 +1,28 @@
+# Raku S3-Credentials Mutations
+
+mutation CreateFairuRakuCredential(
+  $name: String
+  $bucket: String
+  $permissions: [String!]!
+) {
+  createFairuRakuCredential(
+    name: $name
+    bucket: $bucket
+    permissions: $permissions
+  ) {
+    id
+    name
+    access_key_id
+    secret_access_key
+    bucket
+    permissions
+  }
+}
+
+mutation RevokeFairuRakuCredential($id: ID!) {
+  revokeFairuRakuCredential(id: $id)
+}
+
+mutation DeleteFairuRakuCredential($id: ID!) {
+  deleteFairuRakuCredential(id: $id)
+}

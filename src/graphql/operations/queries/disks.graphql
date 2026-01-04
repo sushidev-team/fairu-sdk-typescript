@@ -1,0 +1,72 @@
+# Disk/Sync Queries
+
+fragment DiskCore on FairuDisk {
+  id
+  name
+  type
+  path
+  pattern
+  delete_at_origin
+  healthy
+  syncing
+  active
+  created_at
+  updated_at
+}
+
+fragment DiskWithCredentials on FairuDisk {
+  ...DiskCore
+  folder {
+    id
+    name
+  }
+  credentials {
+    ... on FairuDiskFTPCredentials {
+      ftp_host
+      ftp_port
+      ftp_username
+    }
+    ... on FairuDiskS3Credentials {
+      key
+      region
+      bucket
+      endpoint
+      url
+    }
+  }
+}
+
+query FairuDisks($page: Int, $perPage: Int) {
+  fairuDisks(page: $page, perPage: $perPage) {
+    data {
+      ...DiskCore
+    }
+    paginatorInfo {
+      total
+      count
+      perPage
+      currentPage
+      lastPage
+      hasMorePages
+      firstItem
+      lastItem
+    }
+  }
+}
+
+query FairuDisk($id: ID!) {
+  fairuDisk(id: $id) {
+    ...DiskWithCredentials
+  }
+}
+
+query FairuDiskStatus($id: ID!) {
+  fairuDiskStatus(id: $id) {
+    id
+    syncing
+    open
+    pending
+    synced
+    failed
+  }
+}

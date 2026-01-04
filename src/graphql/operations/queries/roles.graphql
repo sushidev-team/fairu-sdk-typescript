@@ -1,0 +1,33 @@
+# Role Queries
+
+fragment RoleCore on FairuRole {
+  id
+  name
+  permissions
+  created_at
+  updated_at
+}
+
+query FairuRoles($page: Int, $perPage: Int) {
+  fairuRoles(page: $page, perPage: $perPage) {
+    data {
+      ...RoleCore
+    }
+    paginatorInfo {
+      total
+      count
+      perPage
+      currentPage
+      lastPage
+      hasMorePages
+      firstItem
+      lastItem
+    }
+  }
+}
+
+query FairuRole($id: ID!) {
+  fairuRole(id: $id) {
+    ...RoleCore
+  }
+}

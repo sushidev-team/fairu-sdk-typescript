@@ -1,0 +1,118 @@
+# Folder Queries
+
+fragment FolderCore on FairuFolder {
+  id
+  name
+  auto_assign_copyright
+  createdAt: created_at
+  updatedAt: updated_at
+}
+
+fragment FolderWithCopyrights on FairuFolder {
+  ...FolderCore
+  copyrights {
+    id
+    name
+    email
+    active
+  }
+}
+
+query FairuFolder(
+  $page: Int
+  $perPage: Int
+  $folder: ID
+  $search: String
+  $globalSearch: Boolean
+  $orderBy: String
+  $orderDirection: FairuSortingDirection
+  $onlyFolder: Boolean
+) {
+  fairuFolder(
+    page: $page
+    perPage: $perPage
+    folder: $folder
+    search: $search
+    globalSearch: $globalSearch
+    orderBy: $orderBy
+    orderDirection: $orderDirection
+    onlyFolder: $onlyFolder
+  ) {
+    data {
+      ... on FairuAsset {
+        __typename
+        id
+        name
+        mime
+        alt
+        url
+        width
+        height
+        blurhash
+        focal_point
+        blocked
+        has_error
+        assetCreatedAt: created_at
+        assetUpdatedAt: updated_at
+      }
+      ... on FairuFolder {
+        __typename
+        id
+        name
+        auto_assign_copyright
+        folderCreatedAt: created_at
+        folderUpdatedAt: updated_at
+      }
+    }
+    paginatorInfo {
+      total
+      count
+      perPage
+      currentPage
+      lastPage
+      hasMorePages
+      firstItem
+      lastItem
+    }
+  }
+}
+
+query FairuFolderByPath($path: String!) {
+  fairuFolderByPath(path: $path) {
+    ...FolderWithCopyrights
+    content(page: 1, perPage: 50) {
+      data {
+        ... on FairuAsset {
+          __typename
+          id
+          name
+          mime
+          url
+          width
+          height
+          blurhash
+        }
+        ... on FairuFolder {
+          __typename
+          id
+          name
+        }
+      }
+      paginatorInfo {
+        total
+        hasMorePages
+      }
+    }
+  }
+}
+
+query FairuFolderAllAssets($path: String!, $limit: Int) {
+  fairuFolderByPath(path: $path) {
+    allAssets(limit: $limit) {
+      id
+      name
+      mime
+      url
+    }
+  }
+}

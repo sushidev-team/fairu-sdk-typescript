@@ -1,0 +1,27 @@
+# Workflow Mutations
+
+mutation CreateFairuWorkflow($data: FairuWorkflowDTO!) {
+  createFairuWorkflow(data: $data) {
+    id
+    name
+    type
+    active
+    status
+    created_at
+  }
+}
+
+mutation UpdateFairuWorkflow($data: FairuWorkflowDTO!) {
+  updateFairuWorkflow(data: $data) {
+    id
+    name
+    type
+    active
+    status
+    updated_at
+  }
+}
+
+mutation DeleteFairuWorkflow($id: ID!) {
+  deleteFairuWorkflow(id: $id)
+}

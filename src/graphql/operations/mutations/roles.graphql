@@ -1,0 +1,23 @@
+# Role Mutations
+
+mutation CreateFairuRole($data: FairuRoleDTO!) {
+  createFairuRole(data: $data) {
+    id
+    name
+    permissions
+    created_at
+  }
+}
+
+mutation UpdateFairuRole($data: FairuRoleDTO!) {
+  updateFairuRole(data: $data) {
+    id
+    name
+    permissions
+    updated_at
+  }
+}
+
+mutation DeleteFairuRole($id: ID!) {
+  deleteFairuRole(id: $id)
+}

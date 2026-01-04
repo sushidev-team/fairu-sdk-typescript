@@ -1,0 +1,37 @@
+# Workflow Queries
+
+fragment WorkflowCore on FairuWorkflow {
+  id
+  name
+  type
+  active
+  status
+  has_error
+  last_at
+  created_at
+  updated_at
+}
+
+query FairuWorkflows($page: Int, $perPage: Int) {
+  fairuWorkflows(page: $page, perPage: $perPage) {
+    data {
+      ...WorkflowCore
+    }
+    paginatorInfo {
+      total
+      count
+      perPage
+      currentPage
+      lastPage
+      hasMorePages
+      firstItem
+      lastItem
+    }
+  }
+}
+
+query FairuWorkflow($id: ID!) {
+  fairuWorkflow(id: $id) {
+    ...WorkflowCore
+  }
+}

@@ -1,0 +1,33 @@
+# Disk/Sync Mutations
+
+mutation CreateFairuDisk($data: FairuDiskDTO!) {
+  createFairuDisk(data: $data) {
+    id
+    name
+    type
+    path
+    pattern
+    delete_at_origin
+    healthy
+    active
+    created_at
+  }
+}
+
+mutation UpdateFairuDisk($data: FairuDiskDTO!) {
+  updateFairuDisk(data: $data) {
+    id
+    name
+    type
+    path
+    pattern
+    delete_at_origin
+    healthy
+    active
+    updated_at
+  }
+}
+
+mutation DeleteFairuDisk($id: ID!) {
+  deleteFairuDisk(id: $id)
+}

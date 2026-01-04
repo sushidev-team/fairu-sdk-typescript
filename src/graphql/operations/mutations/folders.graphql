@@ -1,0 +1,50 @@
+# Folder Mutations
+
+mutation CreateFairuFolder($data: FairuFolderDTO!) {
+  createFairuFolder(data: $data) {
+    id
+    name
+    auto_assign_copyright
+    created_at
+  }
+}
+
+mutation UpdateFairuFolder($data: FairuFolderDTO!) {
+  updateFairuFolder(data: $data) {
+    id
+    name
+    auto_assign_copyright
+    copyrights {
+      id
+      name
+    }
+    updated_at
+  }
+}
+
+mutation DeleteFairuFolder($id: ID!) {
+  deleteFairuFolder(id: $id)
+}
+
+mutation RenameFairuFolder($id: ID!, $name: String!) {
+  renameFairuFolder(id: $id, name: $name) {
+    id
+    name
+    updated_at
+  }
+}
+
+mutation MoveFairuFolder($id: ID!, $parent: ID) {
+  moveFairuFolder(id: $id, parent: $parent)
+}
+
+mutation CreateFairuFolderFTP($id: ID!) {
+  createFairuFolderFTP(id: $id) {
+    id
+    name
+    type
+    path
+    active
+    healthy
+  }
+}

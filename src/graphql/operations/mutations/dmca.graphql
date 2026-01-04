@@ -1,0 +1,16 @@
+# DMCA Mutations
+
+mutation CreateFairuDmcaComplain($data: FairuDmcaComplainDTO!) {
+  createFairuDmcaComplain(data: $data)
+}
+
+mutation UpdateFairuDmcaComplain($data: FairuDmcaDTO!) {
+  updateFairuDmcaComplain(data: $data) {
+    id
+    name
+    email
+    reply
+    reply_send
+    status
+  }
+}

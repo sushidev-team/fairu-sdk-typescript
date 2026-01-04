@@ -1,0 +1,29 @@
+# PDF Signature Mutations
+
+mutation CreateFairuPdfSignatureRequest($data: FairuFilePdfSignatureRequestDTO!) {
+  createFairuPdfSignatureRequest(data: $data) {
+    id
+    status
+    emails
+    config_url
+    signature_id
+    file {
+      id
+      name
+      url
+    }
+  }
+}
+
+mutation StartFairuPdfSignatureRequest($id: ID!) {
+  startFairuPdfSignatureRequest(id: $id) {
+    id
+    status
+    config_url
+    signature_id
+  }
+}
+
+mutation CancelFairuPdfSignatureRequest($id: ID!) {
+  cancelFairuPdfSignatureRequest(id: $id)
+}

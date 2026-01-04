@@ -1,0 +1,58 @@
+# License Queries
+
+fragment LicenseCore on FairuLicense {
+  id
+  name
+  type
+  interval
+  default
+  active
+  start
+  end
+  days
+  replace_license
+  replace_date
+  created_at
+  updated_at
+}
+
+fragment LicenseWithRelations on FairuLicense {
+  ...LicenseCore
+  copyright {
+    id
+    name
+    email
+  }
+  replace_license_entry {
+    id
+    name
+  }
+  replaced_by_license_entry {
+    id
+    name
+  }
+}
+
+query FairuLicenses($page: Int, $perPage: Int) {
+  fairuLicenses(page: $page, perPage: $perPage) {
+    data {
+      ...LicenseWithRelations
+    }
+    paginatorInfo {
+      total
+      count
+      perPage
+      currentPage
+      lastPage
+      hasMorePages
+      firstItem
+      lastItem
+    }
+  }
+}
+
+query FairuLicense($id: ID) {
+  fairuLicense(id: $id) {
+    ...LicenseWithRelations
+  }
+}

@@ -1,0 +1,43 @@
+# DMCA Queries
+
+fragment DmcaCore on FairuDmca {
+  id
+  name
+  email
+  reply
+  reply_send
+  status
+}
+
+fragment DmcaWithFile on FairuDmca {
+  ...DmcaCore
+  file {
+    id
+    name
+    url
+  }
+}
+
+query FairuDmcas($page: Int, $perPage: Int) {
+  fairuDmcas(page: $page, perPage: $perPage) {
+    data {
+      ...DmcaCore
+    }
+    paginatorInfo {
+      total
+      count
+      perPage
+      currentPage
+      lastPage
+      hasMorePages
+      firstItem
+      lastItem
+    }
+  }
+}
+
+query FairuDmca($id: ID!) {
+  fairuDmca(id: $id) {
+    ...DmcaWithFile
+  }
+}

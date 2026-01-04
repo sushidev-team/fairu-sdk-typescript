@@ -1,0 +1,85 @@
+# Asset Mutations
+
+mutation UpdateFairuFile($data: FairuFileDTO!) {
+  updateFairuFile(data: $data) {
+    id
+    name
+    alt
+    caption
+    description
+    focal_point
+    blocked
+    copyrights {
+      id
+      name
+    }
+    licenses {
+      id
+      name
+    }
+    updated_at
+  }
+}
+
+mutation DeleteFairuFile($id: ID!) {
+  deleteFairuFile(id: $id)
+}
+
+mutation BlockFairuFile($id: ID!) {
+  blockFairuFile(id: $id)
+}
+
+mutation UnblockFairuFile($id: ID!) {
+  unblockFairuFile(id: $id)
+}
+
+mutation RenameFairuFile($id: ID!, $name: String!) {
+  renameFairuFile(id: $id, name: $name) {
+    id
+    name
+    updated_at
+  }
+}
+
+mutation MoveFairuFile($id: ID!, $parent: ID) {
+  moveFairuFile(id: $id, parent: $parent)
+}
+
+mutation DuplicateFairuFile($id: ID!, $parent: ID) {
+  duplicateFairuFile(id: $id, parent: $parent)
+}
+
+mutation RedownloadFairuFile($id: ID!) {
+  redownloadFairuFile(id: $id)
+}
+
+mutation ReplaceFairuFile($id: ID!) {
+  replaceFairuFile(id: $id) {
+    id
+    upload_url
+    sync_url
+    mime
+  }
+}
+
+mutation FairuFileUrlByPath(
+  $tenant: ID!
+  $path: String!
+  $width: Int
+  $height: Int
+  $focal_point: String
+  $withStoredFocalPoint: Boolean
+  $quality: Int
+  $version: FairuAssetVideoVersions
+) {
+  fairuFileUrlByPath(
+    tenant: $tenant
+    path: $path
+    width: $width
+    height: $height
+    focal_point: $focal_point
+    withStoredFocalPoint: $withStoredFocalPoint
+    quality: $quality
+    version: $version
+  )
+}

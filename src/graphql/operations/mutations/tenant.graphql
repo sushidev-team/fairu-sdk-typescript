@@ -1,0 +1,67 @@
+# Tenant Mutations
+
+mutation CreateFairuTenant($name: String!) {
+  createFairuTenant(name: $name) {
+    id
+    name
+    api_key
+    created_at
+  }
+}
+
+mutation UpdateFairuTenant(
+  $name: String
+  $force_license: Boolean
+  $use_ai: Boolean
+  $use_ai_onupload: Boolean
+  $avatar_id: ID
+  $ai_language: String
+  $ai_nsfw: Boolean
+  $ai_blur_faces: Boolean
+  $force_file_alt: Boolean
+  $force_file_description: Boolean
+  $force_file_caption: Boolean
+  $force_file_copyright: Boolean
+  $force_file_policy: Boolean
+  $block_files_with_error: Boolean
+  $custom_domain: String
+  $hide_dotfiles: Boolean
+) {
+  updateFairuTenant(
+    name: $name
+    force_license: $force_license
+    use_ai: $use_ai
+    use_ai_onupload: $use_ai_onupload
+    avatar_id: $avatar_id
+    ai_language: $ai_language
+    ai_nsfw: $ai_nsfw
+    ai_blur_faces: $ai_blur_faces
+    force_file_alt: $force_file_alt
+    force_file_description: $force_file_description
+    force_file_caption: $force_file_caption
+    force_file_copyright: $force_file_copyright
+    force_file_policy: $force_file_policy
+    block_files_with_error: $block_files_with_error
+    custom_domain: $custom_domain
+    hide_dotfiles: $hide_dotfiles
+  ) {
+    id
+    name
+    use_ai
+    use_ai_onupload
+    ai_language
+    force_file_alt
+    force_file_description
+    force_file_caption
+    force_filce_copyright
+    force_file_policy
+    block_files_with_error
+    force_license
+    custom_domain
+    custom_domain_verified
+    custom_domain_status
+    webhook_url
+    webhook_type
+    updated_at
+  }
+}

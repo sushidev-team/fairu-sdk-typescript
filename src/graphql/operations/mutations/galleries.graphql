@@ -1,0 +1,37 @@
+# Gallery Mutations
+
+mutation CreateFairuGallery($data: FairuGalleryDTO!) {
+  createFairuGallery(data: $data) {
+    id
+    name
+    description
+    date
+    location
+    sorting_direction
+    sorting_field
+    active
+    exclude_from_list
+  }
+}
+
+mutation UpdateFairuGallery($data: FairuGalleryDTO!) {
+  updateFairuGallery(data: $data) {
+    id
+    name
+    description
+    date
+    location
+    sorting_direction
+    sorting_field
+    active
+    exclude_from_list
+  }
+}
+
+mutation DeleteFairuGallery($id: ID!) {
+  deleteFairuGallery(id: $id)
+}
+
+mutation CreateFairuGalleryShareLink($id: ID!) {
+  createFairuGalleryShareLink(id: $id)
+}

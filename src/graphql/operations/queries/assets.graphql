@@ -1,0 +1,130 @@
+# Asset Queries
+
+fragment AssetCore on FairuAsset {
+  id
+  name
+  mime
+  alt
+  caption
+  description
+  copyright_text
+  url
+  width
+  height
+  original_width
+  original_height
+  blurhash
+  focal_point
+  blocked
+  has_error
+  size
+  versions
+  created_at
+  updated_at
+}
+
+fragment AssetWithRelations on FairuAsset {
+  ...AssetCore
+  copyrights {
+    id
+    name
+    email
+    website
+    active
+    blocked
+  }
+  licenses {
+    id
+    name
+    type
+    start
+    end
+    active
+  }
+}
+
+query FairuFile($id: ID!) {
+  fairuFile(id: $id) {
+    ...AssetWithRelations
+  }
+}
+
+query FairuFileByPath($path: String!) {
+  fairuFileByPath(path: $path) {
+    ...AssetWithRelations
+  }
+}
+
+query FairuFiles($page: Int, $perPage: Int, $folder: ID) {
+  fairuFiles(page: $page, perPage: $perPage, folder: $folder) {
+    data {
+      ...AssetCore
+    }
+    paginatorInfo {
+      total
+      count
+      perPage
+      currentPage
+      lastPage
+      hasMorePages
+      firstItem
+      lastItem
+    }
+  }
+}
+
+query FairuMultipleFiles($ids: [ID!]) {
+  fairuMultipleFiles(ids: $ids) {
+    ...AssetCore
+  }
+}
+
+query FairuFilesTotalSize($ids: [ID!]!) {
+  fairuFilesTotalSize(ids: $ids)
+}
+
+query FairuSearch(
+  $search: String!
+  $page: Int
+  $perPage: Int
+  $orderBy: String
+  $orderDirection: FairuSortingDirection
+) {
+  fairuSearch(
+    search: $search
+    page: $page
+    perPage: $perPage
+    orderBy: $orderBy
+    orderDirection: $orderDirection
+  ) {
+    data {
+      ...AssetCore
+    }
+    paginatorInfo {
+      total
+      count
+      perPage
+      currentPage
+      lastPage
+      hasMorePages
+      firstItem
+      lastItem
+    }
+  }
+}
+
+query FairuAllFilesFlat($afterCursor: String, $limit: Int) {
+  fairuAllFilesFlat(afterCursor: $afterCursor, limit: $limit) {
+    entries {
+      id
+      name
+      path
+      size
+      mime
+      isFolder
+      updatedAt
+    }
+    nextCursor
+    hasMore
+  }
+}

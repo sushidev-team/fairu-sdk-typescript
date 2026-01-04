@@ -1,0 +1,51 @@
+# Tenant Queries
+
+fragment TenantCore on FairuTenant {
+  id
+  name
+  use_ai
+  use_ai_onupload
+  ai_language
+  force_file_alt
+  force_file_description
+  force_file_caption
+  force_filce_copyright
+  force_file_policy
+  block_files_with_error
+  force_license
+  custom_domain
+  custom_domain_verified
+  custom_domain_status
+  webhook_url
+  webhook_type
+  created_at
+  updated_at
+  trial_ends_at
+}
+
+fragment TenantWithAvatar on FairuTenant {
+  ...TenantCore
+  avatar {
+    id
+    url
+    width
+    height
+  }
+}
+
+query FairuTenant {
+  fairuTenant {
+    ...TenantWithAvatar
+  }
+}
+
+query FairuHealthCheck {
+  fairuHealthCheck {
+    version
+    healthy
+  }
+}
+
+query FairuSupportedDomains {
+  fairuSupportedDomains
+}

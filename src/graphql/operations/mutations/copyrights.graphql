@@ -1,0 +1,39 @@
+# Copyright Mutations
+
+mutation CreateFairuCopyright($data: FairuCopyrightDTO!) {
+  createFairuCopyright(data: $data) {
+    id
+    name
+    email
+    phone
+    website
+    active
+    blocked
+    created_at
+  }
+}
+
+mutation UpdateFairuCopyright($data: FairuCopyrightDTO!) {
+  updateFairuCopyright(data: $data) {
+    id
+    name
+    email
+    phone
+    website
+    active
+    blocked
+    updated_at
+  }
+}
+
+mutation DeleteFairuCopyright(
+  $id: ID!
+  $deleteAssets: Boolean
+  $deleteLicenses: Boolean
+) {
+  deleteFairuCopyright(
+    id: $id
+    deleteAssets: $deleteAssets
+    deleteLicenses: $deleteLicenses
+  )
+}

@@ -1,0 +1,19 @@
+# Raku S3-Credentials Queries
+
+fragment RakuCredentialCore on FairuRakuCredential {
+  id
+  name
+  access_key_id
+  bucket
+  permissions
+  active
+  last_used_at
+  expires_at
+  created_at
+}
+
+query FairuRakuCredentials {
+  fairuRakuCredentials {
+    ...RakuCredentialCore
+  }
+}

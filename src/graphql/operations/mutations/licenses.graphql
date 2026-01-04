@@ -1,0 +1,47 @@
+# License Mutations
+
+mutation CreateFairuLicense($data: FairuLicenseDTO!) {
+  createFairuLicense(data: $data) {
+    id
+    name
+    type
+    interval
+    default
+    active
+    start
+    end
+    days
+    replace_license
+    replace_date
+    created_at
+    copyright {
+      id
+      name
+    }
+  }
+}
+
+mutation UpdateFairuLicense($data: FairuLicenseDTO!) {
+  updateFairuLicense(data: $data) {
+    id
+    name
+    type
+    interval
+    default
+    active
+    start
+    end
+    days
+    replace_license
+    replace_date
+    updated_at
+    copyright {
+      id
+      name
+    }
+  }
+}
+
+mutation DeleteFairuLicense($id: ID!, $deleteAssets: Boolean) {
+  deleteFairuLicense(id: $id, deleteAssets: $deleteAssets)
+}

@@ -1,0 +1,133 @@
+# Gallery Queries
+
+fragment GalleryCore on FairuGallery {
+  id
+  name
+  description
+  date
+  location
+  sorting_direction
+  sorting_field
+  copyright_text
+  active
+  exclude_from_list
+}
+
+fragment GalleryWithItems on FairuGallery {
+  ...GalleryCore
+  items {
+    id
+    name
+    mime
+    url
+    width
+    height
+    blurhash
+    focal_point
+  }
+  cover_image {
+    id
+    name
+    url
+    width
+    height
+    blurhash
+  }
+  copyrights {
+    id
+    name
+    email
+    website
+  }
+}
+
+query FairuGallery($id: ID!) {
+  fairuGallery(id: $id) {
+    ...GalleryWithItems
+  }
+}
+
+query FairuGalleries(
+  $tenants: [ID!]!
+  $page: Int
+  $perPage: Int
+  $from: String
+  $until: String
+  $search: String
+  $orderBy: String
+  $orderDirection: String
+) {
+  fairuGalleries(
+    tenants: $tenants
+    page: $page
+    perPage: $perPage
+    from: $from
+    until: $until
+    search: $search
+    orderBy: $orderBy
+    orderDirection: $orderDirection
+  ) {
+    data {
+      ...GalleryCore
+      cover_image {
+        id
+        url
+        width
+        height
+        blurhash
+      }
+    }
+    paginatorInfo {
+      total
+      count
+      perPage
+      currentPage
+      lastPage
+      hasMorePages
+      firstItem
+      lastItem
+    }
+  }
+}
+
+query FairuGalleryItemsPaginated(
+  $id: ID!
+  $page: Int
+  $perPage: Int
+  $orderBy: String
+  $orderDirection: String
+) {
+  fairuGallery(id: $id) {
+    id
+    name
+    itemsPaginated(
+      page: $page
+      perPage: $perPage
+      orderBy: $orderBy
+      orderDirection: $orderDirection
+    ) {
+      data {
+        id
+        name
+        mime
+        url
+        width
+        height
+        blurhash
+        focal_point
+        alt
+        caption
+      }
+      paginatorInfo {
+        total
+        count
+        perPage
+        currentPage
+        lastPage
+        hasMorePages
+        firstItem
+        lastItem
+      }
+    }
+  }
+}

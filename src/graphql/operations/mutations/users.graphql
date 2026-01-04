@@ -1,0 +1,9 @@
+# User Mutations
+
+mutation InviteFairuUser($email: String!, $role: ID!) {
+  inviteFairuUser(email: $email, role: $role)
+}
+
+mutation DeleteFairuUser($id: ID!) {
+  deleteFairuUser(id: $id)
+}

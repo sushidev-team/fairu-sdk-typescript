@@ -1,0 +1,37 @@
+# Copyright Queries
+
+fragment CopyrightCore on FairuCopyright {
+  id
+  name
+  email
+  phone
+  website
+  active
+  blocked
+  created_at
+  updated_at
+}
+
+query FairuCopyrights($page: Int, $perPage: Int) {
+  fairuCopyrights(page: $page, perPage: $perPage) {
+    data {
+      ...CopyrightCore
+    }
+    paginatorInfo {
+      total
+      count
+      perPage
+      currentPage
+      lastPage
+      hasMorePages
+      firstItem
+      lastItem
+    }
+  }
+}
+
+query FairuCopyright($id: ID) {
+  fairuCopyright(id: $id) {
+    ...CopyrightCore
+  }
+}
