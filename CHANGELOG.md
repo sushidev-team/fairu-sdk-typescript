@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/sushidev-team/fairu-sdk-typescript/compare/v1.0.0...v1.0.1) (2026-01-05)
+
+
+### Bug Fixes
+
+* include generated GraphQL types in repository ([e917822](https://github.com/sushidev-team/fairu-sdk-typescript/commit/e917822299fa527ac82e3e5a1012dcb594e8f2cd))
+
 ## 1.0.0 (2026-01-04)
 
 
